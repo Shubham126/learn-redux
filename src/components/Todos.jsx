@@ -53,8 +53,8 @@ const Todos = () => {
                         className={`flex items-center justify-between p-4 rounded-2xl transition-all
                             
                             ${todo.completed
-                                ? 'bg-cyan-400 text-black'
-                                : 'bg-pink-500 text-white'
+                                ? 'bg-[#6d001a] text-white'
+                                : 'bg-[#3c570d] text-black'
                             }
                         `}
                     >
@@ -116,7 +116,7 @@ const Todos = () => {
 
                                     <button
                                         onClick={() => handleEdit(todo)}
-                                        className='bg-yellow-400 text-black px-4 py-2 rounded-lg'
+                                        className='bg-yellow-600 text-black px-4 py-2 rounded-lg'
                                     >
                                         Edit
                                     </button>
@@ -127,7 +127,7 @@ const Todos = () => {
                                 onClick={() =>
                                     dispatch(removeTodo(todo.id))
                                 }
-                                className='bg-red-500 px-4 py-2 rounded-lg'
+                                className='bg-red-600 text-bold px-4 py-2 rounded-lg'
                             >
                                 Delete
                             </button>

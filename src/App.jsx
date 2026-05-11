@@ -1,145 +1,32 @@
-import { useState } from 'react'
+import AddTodo from './components/AddTodo'
+import Todos from './components/Todos'
 
-import { useSelector, useDispatch } from 'react-redux'
+const App = () => {
 
-import {
-    removeTodo,
-    updateTodo,
-    toggleComplete
-} from '../features/todo/todoSlice'
+  return (
 
-const Todos = () => {
+    <div
+      className='min-h-screen bg-[#000] flex justify-center items-start py-10 px-4'
+    >
 
-    const todos = useSelector((state) => state.todos.todos)
+      <div
+        className='w-full max-w-2xl bg-[#111a19] p-8 rounded-3xl shadow-2xl border-4 border-yellow-600'
+      >
 
-    const dispatch = useDispatch()
+        <h1
+          className='text-4xl font-bold text-center text-[#f8d794] mb-8'
+        >
+          Redux Toolkit Todo App
+        </h1>
 
-    const [editId, setEditId] = useState(null)
+        <AddTodo />
 
-    const [editText, setEditText] = useState('')
+        <Todos />
 
-    const handleEdit = (todo) => {
+      </div>
 
-        setEditId(todo.id)
-
-        setEditText(todo.text)
-    }
-
-    const handleUpdate = (id) => {
-
-        if (!editText.trim()) return
-
-        dispatch(
-            updateTodo({
-                id,
-                text: editText
-            })
-        )
-
-        setEditId(null)
-
-        setEditText('')
-    }
-
-    return (
-
-        <div className='space-y-4'>
-
-            {
-                todos.map((todo) => (
-
-                    <div
-                        key={todo.id}
-                        className={`flex items-center justify-between p-4 rounded-2xl transition-all
-                            
-                            ${todo.completed
-                                ? 'bg-cyan-400 text-black'
-                                : 'bg-pink-500 text-white'
-                            }
-                        `}
-                    >
-
-                        <div className='flex items-center gap-3 flex-1'>
-
-                            <input
-                                type="checkbox"
-                                checked={todo.completed}
-                                onChange={() =>
-                                    dispatch(toggleComplete(todo.id))
-                                }
-                                className='w-5 h-5'
-                            />
-
-                            {
-                                editId === todo.id ? (
-
-                                    <input
-                                        type="text"
-                                        value={editText}
-                                        onChange={(e) =>
-                                            setEditText(e.target.value)
-                                        }
-                                        className='px-3 py-2 rounded-lg text-black outline-none flex-1'
-                                    />
-
-                                ) : (
-
-                                    <p
-                                        className={`text-lg font-medium
-
-                                            ${todo.completed
-                                                ? 'line-through'
-                                                : ''
-                                            }
-                                        `}
-                                    >
-                                        {todo.text}
-                                    </p>
-                                )
-                            }
-
-                        </div>
-
-                        <div className='flex gap-3 ml-4'>
-
-                            {
-                                editId === todo.id ? (
-
-                                    <button
-                                        onClick={() => handleUpdate(todo.id)}
-                                        className='bg-green-500 px-4 py-2 rounded-lg'
-                                    >
-                                        Save
-                                    </button>
-
-                                ) : (
-
-                                    <button
-                                        onClick={() => handleEdit(todo)}
-                                        className='bg-yellow-400 text-black px-4 py-2 rounded-lg'
-                                    >
-                                        Edit
-                                    </button>
-                                )
-                            }
-
-                            <button
-                                onClick={() =>
-                                    dispatch(removeTodo(todo.id))
-                                }
-                                className='bg-red-500 px-4 py-2 rounded-lg'
-                            >
-                                Delete
-                            </button>
-
-                        </div>
-
-                    </div>
-                ))
-            }
-
-        </div>
-    )
+    </div>
+  )
 }
 
-export default Todos
+export default App

@@ -35,7 +35,7 @@ const AddTodo = () => {
 
             <button
                 type='submit'
-                className='bg-pink-500 hover:bg-pink-600 transition-all px-6 py-3 rounded-xl font-semibold'
+                className='bg-yellow-600 hover:bg-[#2e311a] transition-all px-6 py-3 rounded-xl font-semibold'
             >
                 Add
             </button>
